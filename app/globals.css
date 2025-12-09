@@ -17,13 +17,8 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* 更接近标准企业官网：白底、深色文字、抗锯齿 */
+  @apply bg-white text-gray-900 antialiased;
 }
 
 @layer utilities {
