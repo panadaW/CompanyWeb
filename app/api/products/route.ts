@@ -109,11 +109,15 @@ export async function GET(request: Request) {
     }
 
     // 排序
-    const [sortField, sortOrder] = sort.split(':')
+    const [sortFieldRaw, sortOrderRaw] = sort.split(':')
+    const sortField =
+      (sortFieldRaw || 'createdAt') as keyof (typeof mockProducts)[number]
+    const sortOrder = sortOrderRaw === 'asc' ? 'asc' : 'desc'
     filteredProducts.sort((a, b) => {
       const aValue = a[sortField as keyof typeof a]
       const bValue = b[sortField as keyof typeof b]
       
+      if (aValue === undefined || bValue === undefined) return 0
       if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1
       if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1
       return 0

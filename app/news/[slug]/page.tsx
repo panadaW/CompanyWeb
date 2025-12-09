@@ -24,6 +24,11 @@ export function generateMetadata({ params }: Params): Metadata {
   }
 }
 
+// 静态导出需要预生成所有可用的 slug
+export function generateStaticParams() {
+  return newsItems.map((item) => ({ slug: item.slug }))
+}
+
 export default function NewsDetailPage({ params }: Params) {
   const news = newsItems.find((item) => item.slug === params.slug)
 

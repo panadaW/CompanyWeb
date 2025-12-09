@@ -163,7 +163,20 @@ export interface ProductListParams extends PaginationParams {
 export async function getProducts(
   params?: ProductListParams
 ): Promise<ApiResponse<PaginatedResponse<Product>>> {
-  return get<PaginatedResponse<Product>>('/products', params)
+  const query: Record<string, string | number | undefined> | undefined = params
+    ? {
+        page: params.page,
+        limit: params.limit,
+        sort: params.sort,
+        category: params.category,
+        categoryId: params.categoryId,
+        tags: params.tags,
+        search: params.search,
+        status: params.status,
+      }
+    : undefined
+
+  return get<PaginatedResponse<Product>>('/products', query)
 }
 
 /**
@@ -184,7 +197,17 @@ export async function getProductCategories(params?: {
   parentId?: string
   includeProducts?: boolean
 }): Promise<ApiResponse<unknown[]>> {
-  return get<unknown[]>('/products/categories', params)
+  const query: Record<string, string | number | undefined> | undefined = params
+    ? {
+        parentId: params.parentId,
+        includeProducts:
+          params.includeProducts !== undefined
+            ? params.includeProducts ? 'true' : 'false'
+            : undefined,
+      }
+    : undefined
+
+  return get<unknown[]>('/products/categories', query)
 }
 
 // ==================== 新闻相关 API ====================
@@ -223,7 +246,20 @@ export interface NewsListParams extends PaginationParams {
 export async function getNews(
   params?: NewsListParams
 ): Promise<ApiResponse<PaginatedResponse<News>>> {
-  return get<PaginatedResponse<News>>('/news', params)
+  const query: Record<string, string | number | undefined> | undefined = params
+    ? {
+        page: params.page,
+        limit: params.limit,
+        sort: params.sort,
+        category: params.category,
+        tags: params.tags,
+        search: params.search,
+        year: params.year,
+        month: params.month,
+      }
+    : undefined
+
+  return get<PaginatedResponse<News>>('/news', query)
 }
 
 /**
@@ -250,7 +286,14 @@ export async function getPopularNews(params?: {
   limit?: number
   period?: 'day' | 'week' | 'month' | 'all'
 }): Promise<ApiResponse<News[]>> {
-  return get<News[]>('/news/popular', params)
+  const query: Record<string, string | number | undefined> | undefined = params
+    ? {
+        limit: params.limit,
+        period: params.period,
+      }
+    : undefined
+
+  return get<News[]>('/news/popular', query)
 }
 
 // ==================== 案例相关 API ====================
@@ -294,7 +337,18 @@ export interface CaseListParams extends PaginationParams {
 export async function getCases(
   params?: CaseListParams
 ): Promise<ApiResponse<PaginatedResponse<Case>>> {
-  return get<PaginatedResponse<Case>>('/cases', params)
+  const query: Record<string, string | number | undefined> | undefined = params
+    ? {
+        page: params.page,
+        limit: params.limit,
+        sort: params.sort,
+        industry: params.industry,
+        tags: params.tags,
+        search: params.search,
+      }
+    : undefined
+
+  return get<PaginatedResponse<Case>>('/cases', query)
 }
 
 /**
@@ -363,7 +417,15 @@ export interface SearchResult {
 export async function search(
   params: SearchParams
 ): Promise<ApiResponse<SearchResult>> {
-  return get<SearchResult>('/search', params)
+  const query: Record<string, string | number | undefined> = {
+    q: params.q,
+    type: params.type,
+    page: params.page,
+    limit: params.limit,
+    sort: params.sort,
+  }
+
+  return get<SearchResult>('/search', query)
 }
 
 /**
@@ -391,7 +453,13 @@ export async function getAboutInfo(): Promise<ApiResponse<unknown>> {
 export async function getTeam(params?: {
   department?: string
 }): Promise<ApiResponse<unknown[]>> {
-  return get<unknown[]>('/about/team', params)
+  const query: Record<string, string | number | undefined> | undefined = params
+    ? {
+        department: params.department,
+      }
+    : undefined
+
+  return get<unknown[]>('/about/team', query)
 }
 
 // ==================== Newsletter 相关 API ====================

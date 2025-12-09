@@ -54,6 +54,11 @@ const mockProducts = [
   },
 ]
 
+// 供静态导出使用，预先声明可生成的动态参数
+export function generateStaticParams() {
+  return mockProducts.flatMap((p) => [{ id: p.id }, { id: p.slug }])
+}
+
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
