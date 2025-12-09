@@ -1,0 +1,1 @@
+{"success":true,"data":{"id":"prod-002","name":"产品服务二","slug":"product-service-2","description":"创新的技术方案，助力企业数字化转型","shortDescription":"创新的技术方案","category":{"id":"cat-002","name":"技术服务"},"categoryId":"cat-002","images":["/images/product-2.jpg"],"features":["特性1","特性2"],"status":"active","tags":["标签1"],"createdAt":"2024-01-05T00:00:00Z","updatedAt":"2024-01-10T00:00:00Z"}}
